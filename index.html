@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Một điều anh muốn nói với em ❤️</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:Georgia,"Times New Roman",serif;
+  color:#4b2735;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at top,#fff7fa 0,#ffdbe8 45%,#f6b6ce 100%);
+}
+
+/* ================= TIM BAY ================= */
+
+.bg-heart{
+  position:fixed;
+  bottom:-50px;
+  z-index:0;
+  pointer-events:none;
+  animation:rise linear forwards;
+  opacity:.65;
+}
+
+@keyframes rise{
+  from{
+    transform:translateY(0) rotate(0);
+    opacity:0;
+  }
+
+  15%{
+    opacity:.75;
+  }
+
+  to{
+    transform:translateY(-115vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* ================= KHUNG CHÍNH ================= */
+
+.app{
+  width:min(94vw,650px);
+  max-height:94vh;
+  overflow:auto;
+  position:relative;
+  z-index:2;
+  padding:22px;
+}
+
+.card{
+  background:rgba(255,255,255,.93);
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:32px;
+  padding:30px 25px;
+  text-align:center;
+
+  box-shadow:
+    0 25px 70px rgba(100,35,65,.2);
+
+  backdrop-filter:blur(12px);
+}
+
+/* ================= ẢNH HAI NGƯỜI ================= */
+
+.photos{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:4px auto 18px;
+  position:relative;
+}
+
+.photo{
+  width:125px;
+  height:125px;
+  border-radius:50%;
+  object-fit:cover;
+  border:5px solid white;
+
+  box-shadow:
+    0 8px 25px rgba(120,40,75,.18);
+
+  background:#ffe1ec;
+}
+
+.photo:first-child{
+  margin-right:-22px;
+  z-index:2;
+}
+
+.photo:last-child{
+  margin-left:-22px;
+}
+
+.heart-between{
+  position:absolute;
+  z-index:3;
+  font-size:32px;
+  filter:drop-shadow(0 4px 5px #fff);
+}
+
+/* ================= TEXT ================= */
+
+.kicker{
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  letter-spacing:3px;
+  color:#b65c80;
+  font-weight:700;
+}
+
+h1{
+  font-size:34px;
+  margin:10px 0;
+  color:#6b2946;
+}
+
+.subtitle{
+  font-size:17px;
+  line-height:1.6;
+  margin:0 auto 22px;
+  max-width:510px;
+}
+
+/* ================= BUTTON ================= */
+
+.btn{
+  border:0;
+  border-radius:999px;
+  padding:14px 22px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.22s;
+
+  box-shadow:
+    0 7px 18px rgba(100,30,60,.12);
+
+  font-family:Arial,sans-serif;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+.primary{
+  background:#ed4f82;
+  color:white;
+}
+
+.secondary{
+  background:#ffe08a;
+  color:#654b00;
+}
+
+.ghost{
+  background:#f1edf0;
+  color:#65535b;
+}
+
+/* ================= CÁC MÀN HÌNH ================= */
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+  animation:fade .55s ease;
+}
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* ================= THƯ ================= */
+
+.letter{
+  text-align:left;
+
+  background:#fff8fb;
+
+  border-radius:22px;
+
+  padding:23px;
+
+  border:1px solid #f4d7e2;
+
+  line-height:1.85;
+
+  font-size:17px;
+
+  min-height:210px;
+}
+
+.letter p{
+  margin:0 0 12px;
+}
+
+/* ================= DOT ================= */
+
+.controls{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.dots{
+  display:flex;
+  gap:7px;
+  justify-content:center;
+  margin-top:17px;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#e5c6d1;
+}
+
+.dot.on{
+  background:#ed4f82;
+  width:20px;
+  border-radius:10px;
+}
+
+/* ================= CÂU HỎI ================= */
+
+.question{
+  margin-top:8px;
+  font-size:22px;
+  font-weight:bold;
+  line-height:1.5;
+}
+
+.choice-area{
+  height:150px;
+  position:relative;
+  margin-top:20px;
+}
+
+.choice-area button{
+  position:absolute;
+}
+
+.yes{
+  left:calc(50% - 145px);
+  top:30px;
+  background:#ef4d80;
+  color:white;
+}
+
+.maybe{
+  left:calc(50% - 45px);
+  top:30px;
+  background:#ffdb72;
+  color:#5d4700;
+}
+
+.no{
+  left:calc(50% + 55px);
+  top:30px;
+  background:#ece8eb;
+  color:#5d5559;
+}
+
+/* ================= KẾT QUẢ ================= */
+
+.result-emoji{
+  font-size:80px;
+  animation:pulse 1s infinite alternate;
+}
+
+@keyframes pulse{
+  to{
+    transform:scale(1.08);
+  }
+}
+
+.big-result{
+  font-size:38px;
+  margin:8px 0;
+  color:#e44378;
+}
+
+.note{
+  font-family:Arial,sans-serif;
+  color:#9c7885;
+  font-size:13px;
+  margin-top:16px;
+}
+
+/* ================= NÚT NHẠC ================= */
+
+.music{
+  position:fixed;
+  right:16px;
+  top:16px;
+  z-index:10;
+
+  width:46px;
+  height:46px;
+
+  border:0;
+  border-radius:50%;
+
+  background:white;
+
+  box-shadow:
+    0 7px 20px rgba(80,20,50,.15);
+
+  cursor:pointer;
+
+  font-size:20px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:560px){
+
+  .app{
+    padding:8px;
+  }
+
+  .card{
+    padding:24px 16px;
+  }
+
+  .photo{
+    width:95px;
+    height:95px;
+  }
+
+  h1{
+    font-size:27px;
+  }
+
+  .question{
+    font-size:19px;
+  }
+
+  .letter{
+    font-size:16px;
+  }
+
+  .yes{
+    left:10px;
+  }
+
+  .maybe{
+    left:calc(50% - 48px);
+  }
+
+  .no{
+    left:auto;
+    right:10px;
+  }
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     🎵 NHẠC
+     ========================================================= -->
+
+<button
+  class="music"
+  id="musicBtn"
+  onclick="toggleMusic()"
+  title="Bật/tắt nhạc">
+
+  🎵
+
+</button>
+
+
+<audio
+  id="music"
+  loop
+  preload="auto">
+
+  <!-- 🔴 SỬA 1: Đổi thành file nhạc của bạn -->
+
+  <source
+    src="music.mp3"
+    type="audio/mpeg">
+
+</audio>
+
+
+
+<!-- =========================================================
+     ❤️ KHU VỰC TIM BAY
+     ========================================================= -->
+
+<div id="hearts"></div>
+
+
+
+<main class="app">
+
+<div class="card">
+
+
+<!-- =========================================================
+     👩‍❤️‍👨 ẢNH HAI NGƯỜI
+     ========================================================= -->
+
+<div class="photos">
+
+  <!-- 🔴 SỬA 2: Đổi tên 2 file ảnh -->
+
+  <img
+    class="photo"
+    src="photo1.jpg"
+    alt="Ảnh của anh">
+
+  <div class="heart-between">
+    ❤️
+  </div>
+
+  <img
+    class="photo"
+    src="photo2.jpg"
+    alt="Ảnh của em">
+
+</div>
+
+
+
+<!-- =========================================================
+     💌 MÀN HÌNH MỞ ĐẦU
+     ========================================================= -->
+
+<section
+  class="section active"
+  id="intro">
+
+  <div class="kicker">
+    GỬI ĐẾN EM
+  </div>
+
+  <h1>
+
+    Chào em,
+    <span id="herName">
+      [TÊN NGƯỜI ẤY]
+    </span>
+
+    ❤️
+
+  </h1>
+
+  <p class="subtitle">
+
+    Anh có một điều đã muốn nói
+    với em từ khá lâu.
+
+    Hôm nay anh lấy hết can đảm
+    để nói ra...
+
+  </p>
+
+  <button
+    class="btn primary"
+    onclick="openLetter()">
+
+    💌 Mở thư của anh
+
+  </button>
+
+</section>
+
+
+
+<!-- =========================================================
+     💌 THƯ TÌNH
+     ========================================================= -->
+
+<section
+  class="section"
+  id="letter">
+
+  <div class="kicker">
+    MỘT BỨC THƯ NHỎ
+  </div>
+
+  <h1>
+    Anh muốn nói với em...
+  </h1>
+
+
+  <div
+    class="letter"
+    id="letterText">
+  </div>
+
+
+  <div
+    class="dots"
+    id="dots">
+  </div>
+
+
+  <div class="controls">
+
+    <button
+      class="btn ghost"
+      id="prevBtn"
+      onclick="prevLetter()">
+
+      ← Trước
+
+    </button>
+
+
+    <button
+      class="btn primary"
+      id="nextBtn"
+      onclick="nextLetter()">
+
+      Tiếp theo →
+
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ❤️ CÂU HỎI TỎ TÌNH
+     ========================================================= -->
+
+<section
+  class="section"
+  id="ask">
+
+  <div class="kicker">
+
+    VÀ ĐÂY LÀ ĐIỀU
+    QUAN TRỌNG NHẤT
+
+  </div>
+
+
+  <div class="question">
+
+    <span id="herName2">
+      [TÊN NGƯỜI ẤY]
+    </span>
+
+    , em có đồng ý
+
+    <br>
+
+    làm người yêu anh không?
+
+    🥺❤️
+
+  </div>
+
+
+
+  <div
+    class="choice-area"
+    id="choiceArea">
+
+
+    <!-- ĐỒNG Ý -->
+
+    <button
+      class="btn yes"
+      onclick="answer('ĐỒNG Ý')">
+
+      💗 Đồng ý
+
+    </button>
+
+
+
+    <!-- PHÂN VÂN -->
+
+    <button
+      class="btn maybe"
+      onclick="answer('PHÂN VÂN')">
+
+      🥺 Phân vân
+
+    </button>
+
+
+
+    <!-- KHÔNG -->
+
+    <button
+      class="btn no"
+      id="noBtn"
+      onclick="answer('KHÔNG')">
+
+      🙈 Không
+
+    </button>
+
+  </div>
+
+
+  <div class="note">
+
+    Không cần trả lời theo ý anh.
+
+    Chỉ cần là câu trả lời thật lòng
+    của em. ❤️
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     🎉 MÀN HÌNH KẾT QUẢ
+     ========================================================= -->
+
+<section
+  class="section"
+  id="result">
+
+
+  <div
+    class="result-emoji"
+    id="resultEmoji">
+  </div>
+
+
+  <div
+    class="big-result"
+    id="resultTitle">
+  </div>
+
+
+  <p
+    class="subtitle"
+    id="resultText">
+  </p>
+
+
+  <div class="note">
+
+    Câu trả lời của em
+    đã được gửi đến anh rồi 💌
+
+  </div>
+
+</section>
+
+
+</div>
+</main>
+
+
+
+<!-- =========================================================
+     📧 FORM GỬI KẾT QUẢ
+     ========================================================= -->
+
+<form
+  id="sendForm"
+  method="POST"
+  target="hiddenFrame"
+  style="display:none">
+
+  <input
+    name="answer"
+    id="answerField">
+
+  <input
+    name="page"
+    value="App tỏ tình GitHub">
+
+  <input
+    name="time"
+    id="timeField">
+
+</form>
+
+
+<iframe
+  name="hiddenFrame"
+  style="display:none">
+</iframe>
+
+
+
+<script>
+
+
+/* ============================================================
+   🔴 CẤU HÌNH APP
+   ============================================================ */
+
+
+/* 🔴 SỬA 3:
+   Đổi thành tên người ấy
+*/
+
+const HER_NAME = "TÊN NGƯỜI ẤY";
+
+
+
+/*
+   URL Google Apps Script
+
+   Ví dụ:
+
+   https://script.google.com/macros/s/xxxxxxxx/exec
+*/
+
+const GOOGLE_SCRIPT_URL =
+"DAN_URL_GOOGLE_APPS_SCRIPT_VAO_DAY";
+
+
+
+/* ============================================================
+   💌 NỘI DUNG THƯ
+   ============================================================ */
+
+const LETTERS = [
+
+`
+Có lẽ em không biết,
+nhưng từ khi quen em,
+có rất nhiều điều nhỏ bé
+trong cuộc sống của anh
+tự nhiên trở nên đáng nhớ hơn.
+
+Một tin nhắn của em,
+một lần em cười,
+hay đơn giản là một cuộc trò chuyện
+bình thường...
+
+Đôi khi cũng đủ làm
+một ngày của anh vui hơn.
+`,
+
+
+`
+Anh đã từng nghĩ rằng
+mình sẽ không nói điều này đâu.
+
+Nhưng càng giữ trong lòng,
+anh càng nhận ra rằng
+có những cảm xúc
+nếu không nói ra
+thì sẽ rất tiếc.
+
+Anh thích em.
+
+Không phải vì em hoàn hảo,
+
+mà vì em là chính em.
+`,
+
+
+`
+Anh không biết
+câu trả lời của em sẽ là gì.
+
+Và thật lòng,
+anh cũng hơi run
+khi viết những dòng này.
+
+Nhưng anh muốn em biết
+rằng tình cảm này là thật.
+
+Và hôm nay...
+
+anh muốn hỏi em một câu.
+`
+
+];
+
+
+
+/* ============================================================
+   💗 CÁC KẾT QUẢ
+   ============================================================ */
+
+const answers = {
+
+
+  "ĐỒNG Ý": {
+
+    emoji:"💖",
+
+    title:"ANH BIẾT MÀ ❤️",
+
+    text:
+    "Vậy là từ hôm nay chúng ta chính thức thuộc về nhau rồi! " +
+
+    "Cảm ơn em vì đã cho anh một cơ hội. " +
+
+    "Anh sẽ cố gắng để những ngày sau này của chúng ta " +
+
+    "thật nhiều niềm vui. 🥹🌷"
+
+  },
+
+
+  "PHÂN VÂN": {
+
+    emoji:"🥺",
+
+    title:"Anh hiểu mà...",
+
+    text:
+    "Em cứ suy nghĩ thật kỹ nhé. " +
+
+    "Anh không muốn em phải trả lời vội. " +
+
+    "Dù câu trả lời là gì, anh vẫn trân trọng " +
+
+    "sự thật lòng của em. ❤️"
+
+  },
+
+
+  "KHÔNG": {
+
+    emoji:"💔",
+
+    title:"Anh hiểu rồi...",
+
+    text:
+    "Cảm ơn em vì đã thành thật với anh. " +
+
+    "Anh tôn trọng quyết định của em. " +
+
+    "Mong rằng chúng ta vẫn có thể giữ lại " +
+
+    "những điều tốt đẹp đã từng có. 🌷"
+
+  }
+
+};
+
+
+
+/* ============================================================
+   BIẾN
+   ============================================================ */
+
+let letterIndex = 0;
+
+let noAttempts = 0;
+
+
+
+/* ============================================================
+   HIỂN THỊ TÊN
+   ============================================================ */
+
+document.getElementById("herName").textContent =
+HER_NAME;
+
+document.getElementById("herName2").textContent =
+HER_NAME;
+
+
+
+/* ============================================================
+   CHUYỂN MÀN HÌNH
+   ============================================================ */
+
+function show(id){
+
+  document
+    .querySelectorAll(".section")
+    .forEach(
+      s => s.classList.remove("active")
+    );
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+}
+
+
+
+/* ============================================================
+   MỞ THƯ
+   ============================================================ */
+
+function openLetter(){
+
+  letterIndex = 0;
+
+  renderLetter();
+
+  show("letter");
+
+  startMusic();
+
+}
+
+
+
+/* ============================================================
+   HIỂN THỊ THƯ
+   ============================================================ */
+
+function renderLetter(){
+
+  document
+    .getElementById("letterText")
+    .innerHTML =
+    LETTERS[letterIndex]
+      .replace(/\n/g,"<br>");
+
+
+  document
+    .getElementById("prevBtn")
+    .style.visibility =
+    letterIndex === 0
+      ? "hidden"
+      : "visible";
+
+
+  document
+    .getElementById("nextBtn")
+    .textContent =
+    letterIndex === LETTERS.length - 1
+      ? "Đến câu hỏi ❤️"
+      : "Tiếp theo →";
+
+
+  document
+    .getElementById("dots")
+    .innerHTML =
+    LETTERS
+      .map(
+        (_,i) =>
+        `<span class="dot ${
+          i === letterIndex ? "on" : ""
+        }"></span>`
+      )
+      .join("");
+
+}
+
+
+
+/* ============================================================
+   THƯ TIẾP
+   ============================================================ */
+
+function nextLetter(){
+
+  if(
+    letterIndex <
+    LETTERS.length - 1
+  ){
+
+    letterIndex++;
+
+    renderLetter();
+
+  }
+
+  else{
+
+    show("ask");
+
+  }
+
+}
+
+
+
+/* ============================================================
+   THƯ TRƯỚC
+   ============================================================ */
+
+function prevLetter(){
+
+  if(letterIndex > 0){
+
+    letterIndex--;
+
+    renderLetter();
+
+  }
+
+}
+
+
+
+/* ============================================================
+   NHẠC
+   ============================================================ */
+
+function startMusic(){
+
+  const music =
+    document.getElementById("music");
+
+  music
+    .play()
+    .catch(()=>{});
+
+}
+
+
+
+function toggleMusic(){
+
+  const music =
+    document.getElementById("music");
+
+
+  if(music.paused){
+
+    music
+      .play()
+      .catch(()=>{});
+
+    document
+      .getElementById("musicBtn")
+      .textContent = "🔊";
+
+  }
+
+  else{
+
+    music.pause();
+
+    document
+      .getElementById("musicBtn")
+      .textContent = "🎵";
+
+  }
+
+}
+
+
+
+/* ============================================================
+   🙈 NÚT KHÔNG CHẠY TRỐN
+   ============================================================ */
+
+const noBtn =
+document.getElementById("noBtn");
+
+
+const area =
+document.getElementById("choiceArea");
+
+
+
+noBtn.addEventListener(
+  "mouseenter",
+  runNo
+);
+
+
+noBtn.addEventListener(
+  "touchstart",
+  runNo,
+  {passive:true}
+);
+
+
+
+function runNo(e){
+
+  /*
+    Sau 8 lần chạy,
+    nút sẽ dừng lại để người ấy
+    vẫn có thể chọn "Không".
+  */
+
+  if(noAttempts >= 8){
+
+    return;
+
+  }
+
+
+  noAttempts++;
+
+
+  const maxX =
+    Math.max(
+      0,
+      area.clientWidth -
+      noBtn.offsetWidth
+    );
+
+
+  const maxY =
+    Math.max(
+      0,
+      area.clientHeight -
+      noBtn.offsetHeight
+    );
+
+
+  noBtn.style.left =
+    Math.random() * maxX + "px";
+
+
+  noBtn.style.top =
+    Math.random() * maxY + "px";
+
+}
+
+
+
+/* ============================================================
+   ❤️ CÂU TRẢ LỜI
+   ============================================================ */
+
+function answer(choice){
+
+  const data =
+    answers[choice];
+
+
+  document
+    .getElementById("resultEmoji")
+    .textContent =
+    data.emoji;
+
+
+  document
+    .getElementById("resultTitle")
+    .textContent =
+    data.title;
+
+
+  document
+    .getElementById("resultText")
+    .textContent =
+    data.text;
+
+
+  show("result");
+
+
+
+  /*
+    Nếu đồng ý,
+    tạo hiệu ứng tim cực nhiều.
+  */
+
+  if(choice === "ĐỒNG Ý"){
+
+    celebration();
+
+  }
+
+
+  /*
+    Gửi email
+  */
+
+  sendResult(choice);
+
+}
+
+
+
+/* ============================================================
+   📧 GỬI EMAIL
+   ============================================================ */
+
+function sendResult(choice){
+
+  /*
+    Nếu chưa cấu hình Google Apps Script
+    thì không gửi.
+  */
+
+  if(
+    GOOGLE_SCRIPT_URL ===
+    "DAN_URL_GOOGLE_APPS_SCRIPT_VAO_DAY"
+  ){
+
+    console.log(
+      "Chưa cấu hình Google Apps Script."
+    );
+
+    return;
+
+  }
+
+
+  document
+    .getElementById("answerField")
+    .value = choice;
+
+
+  document
+    .getElementById("timeField")
+    .value =
+    new Date()
+      .toLocaleString("vi-VN");
+
+
+  document
+    .getElementById("sendForm")
+    .action =
+    GOOGLE_SCRIPT_URL;
+
+
+  document
+    .getElementById("sendForm")
+    .submit();
+
+}
+
+
+
+/* ============================================================
+   🎉 HIỆU ỨNG ĐỒNG Ý
+   ============================================================ */
+
+function celebration(){
+
+  for(
+    let i = 0;
+    i < 100;
+    i++
+  ){
+
+    const heart =
+      document.createElement("div");
+
+
+    heart.className =
+      "bg-heart";
+
+
+    heart.textContent =
+      [
+        "❤️",
+        "💖",
+        "💕",
+        "💗",
+        "✨",
+        "🌸"
+      ][
+        Math.floor(
+          Math.random() * 6
+        )
+      ];
+
+
+    heart.style.left =
+      Math.random() * 100 +
+      "vw";
+
+
+    heart.style.bottom =
+      "-20px";
+
+
+    heart.style.fontSize =
+      15 +
+      Math.random() * 28 +
+      "px";
+
+
+    heart.style.animationDuration =
+      2 +
+      Math.random() * 3 +
+      "s";
+
+
+    document.body.appendChild(
+      heart
+    );
+
+
+    setTimeout(
+      () => heart.remove(),
+      5500
+    );
+
+  }
+
+}
+
+
+
+/* ============================================================
+   💕 TIM BAY NHẸ LIÊN TỤC
+   ============================================================ */
+
+function ambientHearts(){
+
+  const heart =
+    document.createElement("div");
+
+
+  heart.className =
+    "bg-heart";
+
+
+  heart.textContent =
+    [
+      "♡",
+      "♥",
+      "❤",
+      "💕",
+      "✦"
+    ][
+      Math.floor(
+        Math.random() * 5
+      )
+    ];
+
+
+  heart.style.left =
+    Math.random() * 100 +
+    "vw";
+
+
+  heart.style.fontSize =
+    12 +
+    Math.random() * 18 +
+    "px";
+
+
+  heart.style.animationDuration =
+    6 +
+    Math.random() * 7 +
+    "s";
+
+
+  document.body.appendChild(
+    heart
+  );
+
+
+  setTimeout(
+    () => heart.remove(),
+    14000
+  );
+
+}
+
+
+
+/* Tạo tim mới mỗi 650ms */
+
+setInterval(
+  ambientHearts,
+  650
+);
+
+</script>
+
+</body>
+</html>
